@@ -15,39 +15,66 @@ def generate_problem(level):
     elif level == 'hard':
         a = random.randint(10, 30)
         b = random.randint(10, 30)
-        operation = random.choice(['+', '-', '*', '/'])
+        operation = "/"
     elif level == 'expert':
         a = random.randint(20, 50)
         b = random.randint(20, 50)
-        operation = random.choice(["+", "-", "*", "/"])
+        operation = random.choice(["*", "/"])
     
     problem = f"{a} {operation} {b}"
-    answer = eval(problem)
+
+    #Calculate the answer and handle division separately
+    if operation == "/":
+        #Ensure we don't divide by zero
+        if b == 0:
+            b = random.randint(1, 10)  #or any appropriate non-zero value for your level
+        answer = round(a / b, 2)  #round to 2 decimal places
+    else:
+        answer = eval(problem)
+
     return problem, answer
 
 @login_required
 def play_game(request, level_name):
     level = GameLevel.objects.get(name=level_name)
+
+    # Reset score when switching levels
+    if request.session.get("current_level") != level_name:
+        request.session["score"] = 0
+        request.session["current_level"] = level_name
+
+    if "score" not in request.session:
+        request.session["score"] = 0
+
     if request.method == "POST":
-        user_answer = float(request.POST["answer"])
-        correct_answer = float(request.session.get('answer'))
+        user_answer = round(float(request.POST["answer"]), 2)
+        correct_answer = round(float(request.session.get('answer')), 2)
+        print(f"User answer: {user_answer}, Correct answer: {correct_answer}")
 
         if user_answer == correct_answer:
-            score = 10 # For example, 10 points for a correct answer
-            GameScore.objects.create(user=request.user, level=level, score=score)
-            return redirect("math_games:game_success", level_name=level_name)
+            request.session["score"] += 1 # For example, 10 points for a correct answer
         else:
             return redirect("math_games:game_failure", level_name=level_name)
-    else:
-        problem, answer = generate_problem(level_name)
-        request.session['answer'] = answer
-        return render(request, "math_games/play_game.html", {"level": level, "problem": problem})
+    
+    problem, answer = generate_problem(level_name)
+    request.session['answer'] = answer
+    return render(request, "math_games/play_game.html", {"level": level, "problem": problem, "score": request.session["score"]})
+
+@login_required
+def reset_game(request, level_name):
+    request.session["score"] = 0
+    problem, answer = generate_problem(level_name)
+    request.session['answer'] = answer
+    level = GameLevel.objects.get(name=level_name)
+    return render(request, "math_games/play_game.html", {"level": level, "problem": problem, "score": request.session["score"]})
 
 def game_success(request, level_name):
     return render(request, "math_games/game_success.html", {"level_name": level_name})
 
 def game_failure(request, level_name):
-    return render(request, "math_games/game_failure.html", {"level_name": level_name})
+    score = request.session.get("score", 0)
+    request.session["score"] = 0
+    return render(request, "math_games/game_failure.html", {"level_name": level_name, "score": score})
 
 def select_level(request):
     levels = GameLevel.objects.all()

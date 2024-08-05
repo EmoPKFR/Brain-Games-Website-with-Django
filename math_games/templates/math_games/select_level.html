@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Select Level{% endblock %}
+{% block content %}
+<h2>Select a Level</h2>
+
+<!-- Debugging Information -->
+{% if levels %}
+    <ul>
+        {% for level in levels %}
+        <li><a href="{% url 'math_games:play_game' level.name %}">{{ level.name|capfirst }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No levels available.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ level.name|capfirst }} Level</h2>
+<p>Solve the following problem:</p>
+<p>{{ problem }}</p>
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="answer" placeholder="Your answer">
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

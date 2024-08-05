@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Congratulations!</h2>
+<p>You solved the problem correctly.</p>
+<a href="{% url 'math_games:play_game' level_name %}">Play again</a>
+{% endblock %}

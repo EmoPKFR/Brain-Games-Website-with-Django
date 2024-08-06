@@ -7,8 +7,10 @@ class GameLevel(models.Model):
         ("medium", "Medium"),
         ("hard", "Hard"),
         ("expert", "Expert"),
+        ("multiplication_by_5", "Multiplication by 5"),
+        ("division_by_5", "Division by 5"),
     ]
-    name = models.CharField(max_length=6, choices=LEVEL_CHOICES, unique=True)
+    name = models.CharField(max_length=20, choices=LEVEL_CHOICES, unique=True)
 
     def __str__(self):
         return self.name

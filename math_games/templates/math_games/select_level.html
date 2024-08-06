@@ -3,14 +3,16 @@
 {% block content %}
 <h2>Select a Level</h2>
 
-<!-- Debugging Information -->
-{% if levels %}
-    <ul>
-        {% for level in levels %}
-        <li><a href="{% url 'math_games:play_game' level.name %}">{{ level.name|capfirst }}</a></li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No levels available.</p>
-{% endif %}
+<ul>
+    {% for level in levels %}
+    <li>
+        <a href="{% url 'math_games:play_game' level.name %}">
+            {{ level.name|capfirst }}
+            {% if level.name == 'multiplication_by_5' or level.name == 'division_by_5' %}
+                (medium difficulty)
+            {% endif %}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}

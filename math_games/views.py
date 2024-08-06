@@ -20,6 +20,14 @@ def generate_problem(level):
         a = random.randint(20, 50)
         b = random.randint(20, 50)
         operation = random.choice(["*", "/"])
+    elif level == 'multiplication_by_5':
+        a = random.randint(10, 50)
+        b = 5
+        operation = "*"
+    elif level == 'division_by_5':
+        a = random.randint(50, 200)
+        b = 5
+        operation = "/"
     
     problem = f"{a} {operation} {b}"
 

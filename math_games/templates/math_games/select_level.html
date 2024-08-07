@@ -7,7 +7,13 @@
     {% for level in levels %}
     <li>
         <a href="{% url 'math_games:play_game' level.name %}">
-            {{ level.name|capfirst }}
+            {% if level.name == 'multiplication_by_5' %}
+                Multiplication by 5
+            {% elif level.name == 'division_by_5' %}
+                Division by 5
+            {% else %}
+                {{ level.get_name_display }}
+            {% endif %}
             {% if level.name == 'multiplication_by_5' or level.name == 'division_by_5' %}
                 (medium difficulty)
             {% endif %}

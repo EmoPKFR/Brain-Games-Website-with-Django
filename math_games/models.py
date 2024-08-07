@@ -19,5 +19,11 @@ class GameLevel(models.Model):
 class GameScore(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     level = models.ForeignKey(GameLevel, on_delete=models.CASCADE)
-    score = models.IntegerField()
+    highest_score = models.IntegerField(default=0)
     date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'level')
+
+    def __str__(self):
+        return f"{self.user.username} - {self.level.name} - Highest Score: {self.highest_score}"

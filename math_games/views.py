@@ -60,8 +60,10 @@ def play_game(request, level_name):
         print(f"User answer: {user_answer}, Correct answer: {correct_answer}")
 
         if user_answer == correct_answer:
-            request.session["score"] += 1 # For example, 10 points for a correct answer
+            request.session["score"] += 1
         else:
+            # Save the score before redirecting to failure page
+            save_score(request, level)
             return redirect("math_games:game_failure", level_name=level_name)
     
     problem, answer = generate_problem(level_name)
@@ -77,9 +79,11 @@ def reset_game(request, level_name):
     return render(request, "math_games/play_game.html", {"level": level, "problem": problem, "score": request.session["score"]})
 
 def game_success(request, level_name):
+    save_score(request, level_name)
     return render(request, "math_games/game_success.html", {"level_name": level_name})
 
 def game_failure(request, level_name):
+    save_score(request, level_name)
     score = request.session.get("score", 0)
     request.session["score"] = 0
     return render(request, "math_games/game_failure.html", {"level_name": level_name, "score": score})
@@ -88,3 +92,15 @@ def select_level(request):
     levels = GameLevel.objects.all()
     return render(request, "math_games/select_level.html", {"levels": levels})
 
+def save_score(request, level_name):
+    level = GameLevel.objects.get(name=level_name)
+    score = request.session.get("score", 0)
+    user = request.user
+
+    game_score, created = GameScore.objects.get_or_create(user=user, level=level)
+
+    # Update the highest_score if the current score is higher
+    if score > game_score.highest_score:
+        game_score.highest_score = score
+    
+    game_score.save()

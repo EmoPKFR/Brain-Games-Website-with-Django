@@ -110,3 +110,26 @@ a:hover {
 .logout-button:hover {
     opacity: .85;
 }
+
+/* only for the Leaderboard START*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    background-color: black;
+    color: whitesmoke;
+    text-align: left;
+}
+
+h3 {
+    margin-top: 20px;
+}
+/* only for the Leaderboard END*/

@@ -104,3 +104,13 @@ def save_score(request, level_name):
         game_score.highest_score = score
     
     game_score.save()
+
+@login_required
+def leaderboard(request):
+    # Retrieve the top 10 scores for each level
+    levels = {}
+    for level in GameLevel.objects.all():
+        top_scores = GameScore.objects.filter(level=level).order_by('-highest_score')[:10]
+        levels[level.name] = top_scores
+
+    return render(request, "math_games/leaderboard.html", {"levels": levels})

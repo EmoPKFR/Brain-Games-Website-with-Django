@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Leaderboard{% endblock %}
+
+{% block content %}
+<h2>Leaderboard for Math Games</h2>
+
+{% for level, scores in levels.items %}
+    <h3>{{ level|title }}</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Username</th>
+                <th>Highest Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for score in scores %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ score.user.username }}</td>
+                <td>{{ score.highest_score }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% empty %}
+    <p>No scores available.</p>
+{% endfor %}
+{% endblock %}

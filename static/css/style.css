@@ -133,3 +133,23 @@ h3 {
     margin-top: 20px;
 }
 /* only for the Leaderboard END*/
+
+/* only for sequence memory game START*/
+#grid {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 10px;
+    margin-top: 20px;
+}
+
+.grid-block {
+    width: 100px;
+    height: 100px;
+    background-color: gray;
+    border: 1px solid black;
+}
+
+.grid-block.highlight {
+    background-color: yellow;
+}
+/* only for sequence memory game END*/

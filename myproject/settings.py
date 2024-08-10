@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "posts",
     "users",
     "math_games",
+    "sequence_memory",
 ]
 
 MIDDLEWARE = [

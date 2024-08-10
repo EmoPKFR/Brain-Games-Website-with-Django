@@ -14,6 +14,7 @@ urlpatterns = [
     path("posts/", include("posts.urls")),
     path("users/", include("users.urls")),
     path("math_games/", include("math_games.urls")),
+    path("sequence_memory/", include("sequence_memory.urls")),
 ]
 
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

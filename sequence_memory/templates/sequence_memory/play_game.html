@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Sequence Memory Game{% endblock title %}
+
+{% block content %}
+<h2>Level {{ level }}</h2>
+
+<p>Remember the sequence of blocks that will be highlighted.</p>
+
+<div id="grid">
+    {% for i in "012345678" %}
+    <div class="grid-block" id="block-{{ i }}"></div>
+    {% endfor %}
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="sequence" id="sequence-input">
+    <button type="submit" id="submit-button">Submit Sequence</button>
+</form>
+
+<script>
+    const sequence = {{ sequence|safe }};
+    let currentIndex = 0;
+
+    function highlightBlock(index) {
+        const block = document.getElementById("block-" + index);
+        block.classList.add("highlight");
+        setTimeout(() => block.classList.remove("highlight"), 500);
+    }
+
+    function playSequence() {
+        if (currentIndex < sequence.length) {
+            highlightBlock(sequence[currentIndex]);
+            currentIndex++;
+            setTimeout(playSequence, 1000);
+        } else {
+            // Enable user input after the sequence is played
+            document.getElementById("sequence-input").disabled = false;
+        }
+    }
+
+    document.getElementById("sequence-input").disabled = true;
+    playSequence();
+
+    // Capture user clicks
+    let userSequence = [];
+    document.querySelectorAll(".grid-block").forEach((block, index) => {
+        block.addEventListener("click", () => {
+            if (!document.getElementById("sequence-input").disabled) {
+                userSequence.push(index);
+                block.classList.add("clicked");
+                setTimeout(() => block.classList.remove("clicked"), 300);
+                document.getElementById("sequence-input").value = userSequence.join(',');
+            }
+        });
+    });
+</script>
+
+<style>
+    .grid-block {
+        width: 100px;
+        height: 100px;
+        background-color: gray;
+        border: 1px solid black;
+    }
+
+    .grid-block.highlight {
+        background-color: yellow;
+    }
+
+    .grid-block.clicked {
+        background-color: blue;
+    }
+</style>
+{% endblock content %}

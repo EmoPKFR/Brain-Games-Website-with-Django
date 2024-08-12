@@ -15,12 +15,12 @@
 </head>
 <body>
     <nav class="navbar">
-        <a href="/"><span role="img" aria-label="Home" title="Home">🏠</span></a> |
-        <a href="/about">About</a> |
+        <a href="/"><span role="img" aria-label="Home" title="Home">🏠︎</span></a> |
+        <a href="/about"><span role="img" aria-label="About" title="About">ℹ</span></a> |
         <a href="{% url 'posts:list' %}"><span role="img" aria-label="Posts">📰</span></a> |
 
         {%if user.is_authenticated%}
-            <a href="{% url 'posts:new-post' %}" title="New Post"><span role="img" aria-label="New Post">🆕</span></a> |
+            <a href="{% url 'posts:new_post' %}" title="New Post"><span role="img" aria-label="New Post">🆕</span></a> |
             <a href="{% url 'math_games:select_level' %}" title="Math Games"><span role="img" aria-label="Math Games">🧮</span></a> |
             <a href="{% url 'sequence_memory:play_game' %}" title="Sequence Memory"><span role="img" aria-label="Sequence Memory">🧠</span></a> |
             <a href="{% url 'number_memory:start_game' %}" title="Number Memory"><span role="img" aria-label="Number Memory">🔢</span></a> |
@@ -31,7 +31,7 @@
             </form>
         {%else%}
             <a href="{% url 'users:register' %}" title="User Registration"><span role="img" aria-label="User Registration">🚀</span></a> |
-            <a href="{% url 'users:login' %}" title="User Login"><span role="img" aria-label="User Login">🔏</span></a> 
+            <a href="{% url 'users:login' %}" title="User Login"><span role="img" aria-label="User Login">🔓</span></a> 
         {%endif%}
     </nav>
     <main>

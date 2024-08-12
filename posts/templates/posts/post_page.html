@@ -1,14 +1,22 @@
-{%extends "base.html"%}
+{% extends "base.html" %}
 
-{%block title%}
-{{post.title}}
-{%endblock%}
+{% load static %}
 
-{%block content%}
-<section>
-    <img class="image" src="{{post.image.url}}" alt="{{post.title}}"/>
-    <h1>{{post.title}}</h1>
-    <p>{{post.date}}</p>
-    <p>{{post.body}}</p>
-</section>
-{%endblock%}
+{% block title %}
+{{ post.title }}
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/post_page.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="post-container">
+    <section class="post-content">
+        <img class="image" src="{{ post.image.url }}" alt="{{ post.title }}"/>
+        <h1>{{ post.title }}</h1>
+        <p class="post-date">{{ post.date }}</p>
+        <p class="post-body">{{ post.body }}</p>
+    </section>
+</div>
+{% endblock %}

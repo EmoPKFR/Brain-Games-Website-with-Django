@@ -1,20 +1,25 @@
 {%extends "base.html"%}
 
-{%block title%}
-Posts
-{%endblock%}
+{% load static %}
 
-{%block content%}
-<section>
-<h1>Posts</h1>
-{%for post in posts%}
-<article class="post">
-    <h2>
-        <a href="{% url 'posts:page' slug=post.slug %}">{{post.title}}</a>
-    </h2>
-    <p>{{post.date}} by {{post.author}}</p>
-    <p>{{post.body}}</p>
-</article>
-{%endfor%}
-</section>
-{%endblock%}
+{%block title%}Posts{%endblock%}
+
+{% block extra_css%}
+    <link rel="stylesheet" href="{% static 'css/posts_list.css' %}">
+{% endblock %}
+{% block content %}
+<div class="posts-container">
+    <section>
+        <h1>Posts</h1>
+        {% for post in posts %}
+        <article class="post">
+            <h2>
+                <a href="{% url 'posts:page' slug=post.slug %}">{{ post.title }}</a>
+            </h2>
+            <p>{{ post.body }}</p>
+            <p>{{ post.date }} by {{ post.author }}</p>
+        </article>
+        {% endfor %}
+    </section>
+</div>
+{% endblock %}

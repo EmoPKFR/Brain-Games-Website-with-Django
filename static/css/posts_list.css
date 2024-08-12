@@ -1,0 +1,71 @@
+/* General Styles */
+.posts-container body {
+    background-color: #121212; /* Dark background for dark mode */
+    color: #e0e0e0; /* Light text color for readability */
+    font-family: 'Arial', sans-serif;
+}
+
+/* Posts Container */
+.posts-container {
+    max-width: 800px;
+    margin: 30px auto; /* Center the container */
+}
+
+/* Section Styling */
+section {
+    padding: 20px;
+    background-color: #1e1e1e; /* Slightly lighter dark background */
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    color: #ffffff; /* White color for the main heading */
+    margin-bottom: 20px;
+    text-align: center; /* Center the heading */
+}
+
+/* Post Card Styling */
+.post {
+    background-color: #2c2c2c; /* Darker background for individual posts */
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.post h2 {
+    color: #ffffff; /* White color for post titles */
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.post h2 a {
+    text-decoration: none;
+    color: #66c0f4; /* Light blue color for links */
+}
+
+.post h2 a:hover {
+    text-decoration: underline; /* Underline on hover for better UX */
+}
+
+.post p {
+    color: #e0e0e0; /* Light gray color for post content */
+    margin-bottom: 10px;
+}
+
+.post p:last-of-type {
+    font-size: 0.9rem;
+    color: #b0b0b0; /* Lighter gray for date and author */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    section {
+        padding: 15px;
+    }
+
+    .post h2 {
+        font-size: 1.5rem;
+    }
+}

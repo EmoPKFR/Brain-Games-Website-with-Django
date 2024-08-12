@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.utils.timezone import now
+from django.utils import timezone
+from .models import GameScoreNumberMemory
 import random
 
 def start_game(request):
@@ -36,6 +37,21 @@ def check_number(request):
 
 def game_over(request):
     level = request.session.get("level", 1)
-    context = {"level": level}
+
+    if request.user.is_authenticated:
+        # Get the user's highest score from the database
+        highest_score_record = GameScoreNumberMemory.objects.filter(user=request.user).order_by('-score').first()
+
+        if highest_score_record:
+            # Update the highest score if the current score is higher
+            if level > highest_score_record.score:
+                highest_score_record.score = level
+                highest_score_record.date = timezone.now()
+                highest_score_record.save()
+        else:
+            # If no score exists, create a new record
+            highest_score_record = GameScoreNumberMemory.objects.create(user=request.user, score=level, date=timezone.now())
+
+    context = {"level": level, "highest_score": highest_score_record}
     return render(request, "number_memory/game_over.html", context)
 

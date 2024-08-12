@@ -1,24 +1,33 @@
 {% extends "base.html" %}
-{% block title %}Select Level{% endblock %}
-{% block content %}
-<h2>Select a Level</h2>
 
-<ul>
-    {% for level in levels %}
-    <li>
-        <a href="{% url 'math_games:play_game' level.name %}">
-            {% if level.name == 'multiplication_by_5' %}
-                Multiplication by 5
-            {% elif level.name == 'division_by_5' %}
-                Division by 5
-            {% else %}
-                {{ level.get_name_display }}
-            {% endif %}
-            {% if level.name == 'multiplication_by_5' or level.name == 'division_by_5' %}
-                (medium difficulty)
-            {% endif %}
-        </a>
-    </li>
-    {% endfor %}
-</ul>
+{% load static %}
+
+{% block title%}Select a Level{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/math_games.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="math-games-container">
+    <h2>Select a Level</h2>
+    <ul>
+        {% for level in levels %}
+        <li>
+            <a href="{% url 'math_games:play_game' level.name %}">
+                {% if level.name == 'multiplication_by_5' %}
+                    Multiplication by 5
+                {% elif level.name == 'division_by_5' %}
+                    Division by 5
+                {% else %}
+                    {{ level.get_name_display }}
+                {% endif %}
+                {% if level.name == 'multiplication_by_5' or level.name == 'division_by_5' %}
+                    (medium difficulty)
+                {% endif %}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

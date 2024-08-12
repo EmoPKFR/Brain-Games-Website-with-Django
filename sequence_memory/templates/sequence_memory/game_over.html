@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}Game Over{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/sequence_memory.css' %}">
+{% endblock %}
 
 {% block content %}
 <h2>Game Over</h2>

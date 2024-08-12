@@ -1,10 +1,26 @@
 {%extends "base.html"%}
 
-{%block title%}
-Home
-{%endblock%}
+{% load static %}
+
+{%block title%}Home{%endblock%}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
 
 {%block content%}
-<h1>Home</h1>
-<p>Check out my <a href="/about">About</a> page</p>
+<div class="home-container">
+    <h1>Welcome to Brain Games</h1>
+    <div class="games-grid">
+        <a href="{% url 'math_games:select_level' %}" class="game-box">
+            <br>Math Games 🧮
+        </a>
+        <a href="{% url 'sequence_memory:play_game' %}" class="game-box">
+            <br>Sequence Memory 🧠
+        </a>
+        <a href="{% url 'number_memory:start_game' %}" class="game-box">
+            <br>Number Memory 🔢
+        </a>
+    </div>
+</div>
 {%endblock%}

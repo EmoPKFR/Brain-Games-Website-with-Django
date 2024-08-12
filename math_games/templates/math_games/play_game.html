@@ -1,15 +1,26 @@
 {% extends "base.html" %}
+
+{% load static %}
+
+{% block title%}Play Math Games{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/math_games.css' %}">
+{% endblock %}
+
 {% block content %}
-<h2>{{ level.name|capfirst }} Level</h2>
-<p>Score: {{ score }}</p>
-<p>Solve the following problem:</p>
-<p>{{ problem }}</p>
-<form method="post" action="{% url 'math_games:play_game' level.name %}" style="display: inline;">
-    {% csrf_token %}
-    <input type="text" name="answer" placeholder="Your answer">
-    <button type="submit">Submit</button>
-</form>
-<form method="get" action="{% url 'math_games:reset_game' level.name %}" style="display: inline;">
-    <button type="submit">Reset</button>
-</form>
+<div class="math-games-container">
+    <h2>{{ level.name|capfirst }}</h2>
+    <p>Score: {{ score }}</p>
+    <p>Solve the following problem:</p>
+    <p>{{ problem }}</p>
+    <form method="post" action="{% url 'math_games:play_game' level.name %}">
+        {% csrf_token %}
+        <input type="text" name="answer" placeholder="Your answer">
+        <button type="submit">Submit</button>
+    </form>
+    <form method="get" action="{% url 'math_games:reset_game' level.name %}">
+        <button type="submit">Reset</button>
+    </form>
+</div>
 {% endblock %}

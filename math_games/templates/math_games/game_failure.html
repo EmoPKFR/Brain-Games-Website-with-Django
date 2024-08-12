@@ -1,7 +1,18 @@
 {% extends "base.html" %}
+
+{% load static %}
+
+{% block title%}Math Games Game Over{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/math_games.css' %}">
+{% endblock %}
+
 {% block content %}
-<h2>Oops!</h2>
-<p>Your answer was incorrect. Try again.</p>
-<p>Your score: {{ score }}</p>
-<a href="{% url 'math_games:play_game' level_name %}">Try again</a>
+<div class="math-games-container">
+    <h2>Oops!</h2>
+    <p>Your answer was incorrect. Try again.</p>
+    <p>Your score: {{ score }}</p>
+    <a href="{% url 'math_games:play_game' level_name %}">Try again</a>
+</div>
 {% endblock %}

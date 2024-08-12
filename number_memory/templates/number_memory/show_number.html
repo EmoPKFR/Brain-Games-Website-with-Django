@@ -1,10 +1,18 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}Number Memory Game Level {{ level }}{% endblock %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/number_memory.css' %}">
+{% endblock %}
+
 {% block content %}
+<div class="number-memory-container">
     <meta http-equiv="refresh" content="3;url={% url 'number_memory:answer' %}">
     <h1>Level {{ level }}</h1>
     <p>Remember this number: <strong>{{ number }}</strong></p>
     <p>You will be redirected in 3 seconds...</p>
+</div>
 {% endblock %}

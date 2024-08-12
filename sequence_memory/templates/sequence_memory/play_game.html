@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}Sequence Memory Game{% endblock title %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/sequence_memory.css' %}">
+{% endblock %}
 
 {% block content %}
 <h2>Level {{ level }}</h2>

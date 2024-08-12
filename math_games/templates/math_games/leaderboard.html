@@ -1,31 +1,38 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% block title %}Leaderboard{% endblock %}
+{% load static %}
+
+{% block title%}Leaderboard{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/math_games.css' %}">
+{% endblock %}
 
 {% block content %}
-<h2>Leaderboard for Math Games</h2>
-
-{% for level, scores in levels.items %}
-    <h3>{{ level|title }}</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Rank</th>
-                <th>Username</th>
-                <th>Highest Score</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for score in scores %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ score.user.username }}</td>
-                <td>{{ score.highest_score }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% empty %}
-    <p>No scores available.</p>
-{% endfor %}
+<div class="math-games-container">
+    <h2>Leaderboard for Math Games</h2>
+    {% for level, scores in levels.items %}
+        <h3>{{ level|title }}</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Username</th>
+                    <th>Highest Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for score in scores %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ score.user.username }}</td>
+                    <td>{{ score.highest_score }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% empty %}
+        <p>No scores available.</p>
+    {% endfor %}
+</div>
 {% endblock %}

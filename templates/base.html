@@ -9,11 +9,12 @@
             Django App
         {%endblock%}
     </title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block extra_css %}{% endblock %}
     <script src="{% static 'js/main.js' %}" defer></script>
 </head>
 <body>
-    <nav>
+    <nav class="navbar">
         <a href="/"><span role="img" aria-label="Home" title="Home">🏠</span></a> |
         <a href="/about">About</a> |
         <a href="{% url 'posts:list' %}"><span role="img" aria-label="Posts">📰</span></a> |

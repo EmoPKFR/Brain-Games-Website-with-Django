@@ -1,10 +1,46 @@
-{%extends "base.html"%}
+{% extends "base.html" %}
 
-{%block title%}
-About
-{%endblock%}
+{% load static %}
 
-{%block content%}
-<h1>About</h1>
-<p>Check out my <a href="/">Home</a> page</p>
-{%endblock%}
+{% block title %}
+About Us
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="about-container">
+    <h1>About Brain Games</h1>
+    <p>Welcome to Brain Games! Our website offers a variety of engaging and challenging brain games designed to stimulate your mind and enhance cognitive skills.</p>
+
+    <div class="about-section">
+        <h2>Math Games</h2>
+        <p>Explore our Math Games section, where you can test and improve your arithmetic abilities through a series of progressively challenging levels.</p>
+    </div>
+
+    <div class="about-section">
+        <h2>Sequence Memory</h2>
+        <p>Hone your memory skills with our Sequence Memory game, which challenges you to remember and recall sequences of numbers, enhancing your short-term memory.</p>
+    </div>
+
+    <div class="about-section">
+        <h2>Number Memory</h2>
+        <p>Test your numerical recall with our Number Memory game, where you’ll be required to remember numbers displayed briefly and retrieve them accurately.</p>
+    </div>
+
+    <div class="about-section">
+        <h2>Leaderboards</h2>
+        <p>Compete for the top spot on our Leaderboards and see how you stack up against other players in Math Games, Sequence Memory, and Number Memory challenges.</p>
+    </div>
+
+    <p>Each game is designed with various difficulty levels to ensure that players of all skill levels can enjoy and benefit from the experience.</p>
+    <p>Our website is not just about games; it’s about developing and refining your cognitive skills while having fun.</p>
+    <p>Track your progress and see how your scores improve over time. Our Leaderboards are updated regularly to reflect the highest achievements.</p>
+    <p>Whether you’re a casual gamer looking to pass the time or a competitive player aiming for the top score, Brain Games has something for everyone.</p>
+    <p>Join our community of brain game enthusiasts today, and start your journey towards enhanced mental agility and improved cognitive function!</p>
+
+    <p><a href="/">Back to Home</a></p>
+</div>
+{% endblock %}

@@ -1,12 +1,20 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}Number Memory Game Over{% endblock %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/number_memory.css' %}">
+{% endblock %}
+
 {% block content %}
-<h1>Game Over</h1>
+<div class="number-memory-container">
+    <h1>Game Over</h1>
     <p>You reached level {{ level }}</p>
     {% if highest_score %}
         <p>Your highest score: {{ highest_score.score }} on {{ highest_score.date|date:"Y-m-d" }}</p>
     {% endif %}
     <a href="{% url 'number_memory:start_game' %}">Play Again</a>
+</div>
 {% endblock %}

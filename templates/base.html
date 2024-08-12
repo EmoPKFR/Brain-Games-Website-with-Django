@@ -22,6 +22,7 @@
             <a href="{% url 'posts:new-post' %}" title="New Post"><span role="img" aria-label="New Post">🆕</span></a> |
             <a href="{% url 'math_games:select_level' %}" title="Math Games"><span role="img" aria-label="Math Games">🧮</span></a> |
             <a href="{% url 'sequence_memory:play_game' %}" title="Sequence Memory"><span role="img" aria-label="Sequence Memory">🧠</span></a> |
+            <a href="{% url 'number_memory:start_game' %}" title="Number Memory"><span role="img" aria-label="Number Memory">🔢</span></a> |
             <a href="{% url 'math_games:leaderboard' %}" title="Leaderboard"><span role="img" aria-label="Leaderboard">🏆</span></a> |
             <form class="logout" action="{% url 'users:logout' %}" method="post">
                 {% csrf_token %} 

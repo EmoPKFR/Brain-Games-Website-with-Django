@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Number Memory Game Level {{ level }}{% endblock %}
+
+{% block content %}
+    <meta http-equiv="refresh" content="5;url={% url 'number_memory:answer' %}">
+    <h1>Level {{ level }}</h1>
+    <p>Remember this number: <strong>{{ number }}</strong></p>
+    <p>You will be redirected in 5 seconds...</p>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{%block title%}Number Memory Answer{%endblock%}
+{% block content %}
+<h1>Enter the number you saw:</h1>
+    <form method="post" action="{% url 'number_memory:check_number' %}">
+        {% csrf_token %}
+        <input type="text" name="user_answer" required>
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}

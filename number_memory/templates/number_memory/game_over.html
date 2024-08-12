@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Number Memory Game Over{% endblock %}
+
+{% block content %}
+<h1>Game Over</h1>
+    <p>You reached level {{ level }}</p>
+    <a href="{% url 'number_memory:start_game' %}">Play Again</a>
+{% endblock %}

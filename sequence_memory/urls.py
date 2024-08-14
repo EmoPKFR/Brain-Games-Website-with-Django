@@ -4,6 +4,5 @@ from . import views
 app_name = "sequence_memory"
 
 urlpatterns = [
-    path("play/", views.play_game, name="play_game"),
-    path("game_over/", views.game_over, name="game_over"),
+    path('play_game/', views.play_game, name='play_game'),
 ]

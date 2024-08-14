@@ -11,3 +11,4 @@ urlpatterns = [
     path("select_level/", views.select_level, name="select_level"),
     path('learderboard/', views.leaderboard, name='leaderboard'),
 ]
+    

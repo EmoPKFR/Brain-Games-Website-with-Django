@@ -88,7 +88,9 @@
                 userSequence.push(blockId);
 
                 if (userSequence[userSequence.length - 1] !== sequence[userSequence.length - 1]) {
-                    message.text('Game Over!');
+                    const score = level - 1;
+                    message.text(`Game Over! Your score: ${score}`);
+                    saveScore(score);
                     resetGame();
                     return;
                 }
@@ -104,6 +106,24 @@
                 userSequence = [];
                 level = 0;
                 allowInput = false;
+            }
+
+            // Function to save the score
+            function saveScore(score) {
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'sequence_memory:save_score' %}",  // Replace with your actual URL
+                    data: {
+                        score: score,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    success: function(response) {
+                        console.log(response.message);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error saving score:", error);
+                    }
+                });
             }
 
             // Start the game

@@ -10,6 +10,7 @@
 
 {%block content%}
 <div class="home-container">
+    <h1>Hello {{ user.username }}</h1>
     <h1>Welcome to Brain Games</h1>
     <div class="games-grid">
         <a href="{% url 'math_games:select_level' %}" class="game-box">

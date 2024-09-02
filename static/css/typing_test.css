@@ -1,0 +1,84 @@
+/* Namespace all styles under .typing-test */
+.typing-test {
+    font-family: 'Roboto', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.typing-test .container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.typing-test h1 {
+    color: #333333;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.typing-test p#sentence {
+    font-size: 20px;
+    color: #555555;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.typing-test textarea {
+    width: 100%;
+    max-width: 100%;
+    height: 80px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    resize: none;
+    margin-bottom: 20px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.typing-test button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s;
+}
+
+.typing-test button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.typing-test button:hover:not(:disabled) {
+    background-color: #45a049;
+}
+
+.typing-test p {
+    font-size: 16px;
+    color: #333333;
+}
+
+.typing-test p span {
+    font-weight: bold;
+}
+
+.typing-test footer {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #777777;
+}

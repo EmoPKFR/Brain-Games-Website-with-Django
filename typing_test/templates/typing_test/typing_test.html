@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Typing Test{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/typing_test.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="typing-test">
+        <div class="container">
+            <h1>Typing Test</h1>
+            <p id="sentence">{{ sentence }}</p>
+            <textarea id="typed_text" rows="4" cols="50"></textarea>
+            <br>
+            <button id="start_button">Start</button>
+            <button id="submit_button" disabled>Submit</button>
+
+            <p>Time: <span id="time">0</span> seconds</p>
+            <p>WPM: <span id="wpm">-</span></p>
+            <p>Accuracy: <span id="accuracy">-</span>%</p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        let startTime;
+        let interval;
+        let duration = 10; // duration in seconds
+
+        document.getElementById('start_button').addEventListener('click', function() {
+            // Clear the text area
+            document.getElementById('typed_text').value = '';
+
+            // Disable the submit button until the user starts typing
+            document.getElementById('submit_button').disabled = true;
+
+            // Fetch a new sentence from the server
+            fetch("{% url 'typing_test:typing_test' %}")
+                .then(response => response.text())
+                .then(data => {
+                    // Update the sentence with the new one
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
+                    const newSentence = doc.getElementById('sentence').innerText;
+                    document.getElementById('sentence').innerText = newSentence;
+                    
+                    // Start the timer
+                    startTime = new Date().getTime();
+                    interval = setInterval(updateTime, 100);
+                    document.getElementById('submit_button').disabled = false;
+                });
+        });
+
+        document.getElementById('submit_button').addEventListener('click', function() {
+            clearInterval(interval);
+            let timeTaken = (new Date().getTime() - startTime) / 1000;
+            
+            // Force timeTaken to be exactly 10 seconds if the timer is stopped after the duration
+            if (timeTaken >= duration) {
+                timeTaken = duration;
+                document.getElementById('time').innerText = timeTaken.toFixed(2);
+            }
+
+            let typedText = document.getElementById('typed_text').value;
+            let sentence = document.getElementById('sentence').innerText;
+
+            fetch("{% url 'typing_test:calculate_wpm' %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({
+                    'sentence': sentence,
+                    'typed_text': typedText,
+                    'time_taken': timeTaken
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('wpm').innerText = data.wpm.toFixed(2);
+                document.getElementById('accuracy').innerText = data.accuracy.toFixed(2);
+            });
+        });
+
+        function updateTime() {
+            let timeElapsed = (new Date().getTime() - startTime) / 1000;
+            if (timeElapsed >= duration) {
+                clearInterval(interval);
+                document.getElementById('time').innerText = duration.toFixed(2);
+                document.getElementById('submit_button').click(); // Auto-submit after time runs out
+            } else {
+                document.getElementById('time').innerText = timeElapsed.toFixed(2);
+            }
+        }
+    </script>
+{% endblock %}

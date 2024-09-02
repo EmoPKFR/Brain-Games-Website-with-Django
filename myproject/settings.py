@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "math_games",
     "sequence_memory",
     "number_memory",
+    "typing_test",
 ]
 
 MIDDLEWARE = [

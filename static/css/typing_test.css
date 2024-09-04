@@ -1,4 +1,19 @@
 /* Namespace all styles under .typing-test */
+.typing-test .textarea-container {
+    position: relative;
+  }
+  
+  .typing-test .sentence-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+    opacity: 0.5;
+    pointer-events: none; /* Prevent interaction with the placeholder */
+  }
+
 .typing-test {
     font-family: 'Roboto', Arial, sans-serif;
     margin: 0;
@@ -27,11 +42,13 @@
 
 .typing-test p#sentence {
     font-size: 20px;
+    font-family: 'Arial', sans-serif;
     color: #555555;
     padding: 10px;
     background-color: #f0f0f0;
     border-radius: 4px;
     margin-bottom: 20px;
+    text-align: left;
 }
 
 .typing-test textarea {
@@ -39,12 +56,14 @@
     max-width: 100%;
     height: 80px;
     padding: 10px;
-    font-size: 16px;
+    font-size: 20px;
+    font-family: 'Arial', sans-serif;
     border: 1px solid #cccccc;
     border-radius: 4px;
     resize: none;
     margin-bottom: 20px;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
 }
 
 .typing-test button {

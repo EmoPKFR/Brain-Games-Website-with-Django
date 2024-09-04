@@ -9,20 +9,22 @@
 {% endblock %}
 
 {% block content %}
-    <div class="typing-test">
-        <div class="container">
-            <h1>Typing Test</h1>
-            <p id="sentence">{{ sentence }}</p>
-            <textarea id="typed_text" rows="4" cols="50"></textarea>
-            <br>
-            <button id="start_button">Start</button>
-            <button id="submit_button" disabled>Submit</button>
+  <div class="typing-test">
+    <div class="container">
+      <h1>Typing Test</h1>
+      <div class="textarea-container">
+        <textarea id="typed_text" rows="4" cols="50"></textarea>
+        <p id="sentence" class="sentence-placeholder">{{ sentence }}</p>
+      </div>
+      <br>
+      <button id="start_button">Start</button>
+      <button id="submit_button" disabled>Submit</button>
 
-            <p>Time: <span id="time">0</span> seconds</p>
-            <p>WPM: <span id="wpm">-</span></p>
-            <p>Accuracy: <span id="accuracy">-</span>%</p>
-        </div>
+      <p>Time: <span id="time">0</span> seconds</p>
+      <p>WPM: <span id="wpm">-</span></p>
+      <p>Accuracy: <span id="accuracy">-</span>%</p>
     </div>
+  </div>
 {% endblock %}
 
 {% block extra_js %}

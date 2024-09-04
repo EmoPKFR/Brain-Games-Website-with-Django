@@ -17,7 +17,7 @@
         <p id="sentence" class="sentence-placeholder">{{ sentence }}</p>
       </div>
       <br>
-      <button id="start_button">Start</button>
+      <button id="start_button">Reset</button>
       <button id="submit_button" disabled>Submit</button>
 
       <p>Time: <span id="time">0</span> seconds</p>
@@ -32,34 +32,49 @@
         let startTime;
         let interval;
         let duration = 10; // duration in seconds
-
-        document.getElementById('start_button').addEventListener('click', function() {
-            // Clear the typing area
-            document.getElementById('typed_text').innerHTML = '';
+        let typingStarted = false;
         
-            // Enable the submit button only when typing starts
+        document.getElementById('typed_text').addEventListener('input', function() {
+            if (!typingStarted) {
+                startTypingTest();
+            }
+            checkTyping();
+        });
+        
+        document.getElementById('start_button').addEventListener('click', function() {
+            resetTypingTest();
+        });
+        
+        function startTypingTest() {
+            typingStarted = true;
+        
+            // Start the timer only when typing starts
+            startTime = new Date().getTime();
+            interval = setInterval(updateTime, 100);
+            document.getElementById('submit_button').disabled = false;
+        }
+        
+        function resetTypingTest() {
+            clearInterval(interval);
+            typingStarted = false;
+            document.getElementById('typed_text').innerHTML = '';
+            document.getElementById('time').innerText = '0';
+            document.getElementById('wpm').innerText = '-';
+            document.getElementById('accuracy').innerText = '-';
             document.getElementById('submit_button').disabled = true;
         
-            // Fetch a new sentence from the server
+            // Fetch a new sentence immediately when reset is pressed
             fetch("{% url 'typing_test:typing_test' %}")
                 .then(response => response.text())
                 .then(data => {
-                    // Update the sentence with the new one
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(data, 'text/html');
                     const newSentence = doc.getElementById('sentence').innerText;
                     document.getElementById('sentence').innerText = newSentence;
         
-                    // Enable typing
                     document.getElementById('typed_text').focus();
-                    document.getElementById('typed_text').addEventListener('input', checkTyping);
-                    document.getElementById('submit_button').disabled = false;
-        
-                    // Start the timer
-                    startTime = new Date().getTime();
-                    interval = setInterval(updateTime, 100);
                 });
-        });
+        }
         
         function checkTyping() {
             const typedText = document.getElementById('typed_text').innerText;
@@ -94,44 +109,20 @@
             sel.addRange(range);
             el.focus();
         }
-
-        document.getElementById('start_button').addEventListener('click', function() {
-            // Clear the text area
-            document.getElementById('typed_text').value = '';
-
-            // Disable the submit button until the user starts typing
-            document.getElementById('submit_button').disabled = true;
-
-            // Fetch a new sentence from the server
-            fetch("{% url 'typing_test:typing_test' %}")
-                .then(response => response.text())
-                .then(data => {
-                    // Update the sentence with the new one
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(data, 'text/html');
-                    const newSentence = doc.getElementById('sentence').innerText;
-                    document.getElementById('sentence').innerText = newSentence;
-                    
-                    // Start the timer
-                    startTime = new Date().getTime();
-                    interval = setInterval(updateTime, 100);
-                    document.getElementById('submit_button').disabled = false;
-                });
-        });
-
+        
         document.getElementById('submit_button').addEventListener('click', function() {
             clearInterval(interval);
             let timeTaken = (new Date().getTime() - startTime) / 1000;
-            
+        
             // Force timeTaken to be exactly 10 seconds if the timer is stopped after the duration
             if (timeTaken >= duration) {
                 timeTaken = duration;
                 document.getElementById('time').innerText = timeTaken.toFixed(2);
             }
-
-            let typedText = document.getElementById('typed_text').value;
+        
+            let typedText = document.getElementById('typed_text').innerText;
             let sentence = document.getElementById('sentence').innerText;
-
+        
             fetch("{% url 'typing_test:calculate_wpm' %}", {
                 method: 'POST',
                 headers: {
@@ -146,11 +137,11 @@
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById('wpm').innerText = data.wpm.toFixed(2);
+                document.getElementById('wpm').innerText = data.wpm;
                 document.getElementById('accuracy').innerText = data.accuracy.toFixed(2);
             });
         });
-
+        
         function updateTime() {
             let timeElapsed = (new Date().getTime() - startTime) / 1000;
             if (timeElapsed >= duration) {
@@ -161,5 +152,6 @@
                 document.getElementById('time').innerText = timeElapsed.toFixed(2);
             }
         }
+        
     </script>
 {% endblock %}

@@ -101,3 +101,28 @@
     font-size: 12px;
     color: #777777;
 }
+
+.typing-test .typing-area {
+    width: 100%;
+    max-width: 100%;
+    height: 80px;
+    padding: 10px;
+    font-size: 20px;
+    font-family: 'Arial', sans-serif;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    white-space: pre-wrap; /* Preserve whitespace */
+    outline: none; /* Remove focus outline */
+    overflow-y: auto;
+    color: transparent;
+}
+
+.typing-test .correct {
+    color: green;
+}
+
+.typing-test .incorrect {
+    color: red;
+}

@@ -13,7 +13,7 @@
     <div class="container">
       <h1>Typing Test</h1>
       <div class="textarea-container">
-        <textarea id="typed_text" rows="4" cols="50"></textarea>
+        <div id="typed_text" contenteditable="true" class="typing-area"></div>
         <p id="sentence" class="sentence-placeholder">{{ sentence }}</p>
       </div>
       <br>
@@ -32,6 +32,68 @@
         let startTime;
         let interval;
         let duration = 10; // duration in seconds
+
+        document.getElementById('start_button').addEventListener('click', function() {
+            // Clear the typing area
+            document.getElementById('typed_text').innerHTML = '';
+        
+            // Enable the submit button only when typing starts
+            document.getElementById('submit_button').disabled = true;
+        
+            // Fetch a new sentence from the server
+            fetch("{% url 'typing_test:typing_test' %}")
+                .then(response => response.text())
+                .then(data => {
+                    // Update the sentence with the new one
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
+                    const newSentence = doc.getElementById('sentence').innerText;
+                    document.getElementById('sentence').innerText = newSentence;
+        
+                    // Enable typing
+                    document.getElementById('typed_text').focus();
+                    document.getElementById('typed_text').addEventListener('input', checkTyping);
+                    document.getElementById('submit_button').disabled = false;
+        
+                    // Start the timer
+                    startTime = new Date().getTime();
+                    interval = setInterval(updateTime, 100);
+                });
+        });
+        
+        function checkTyping() {
+            const typedText = document.getElementById('typed_text').innerText;
+            const sentence = document.getElementById('sentence').innerText;
+            let formattedText = '';
+        
+            for (let i = 0; i < typedText.length; i++) {
+                if (i < sentence.length) {
+                    if (typedText[i] === sentence[i]) {
+                        formattedText += `<span class="correct">${typedText[i]}</span>`;
+                    } else {
+                        formattedText += `<span class="incorrect">${typedText[i]}</span>`;
+                    }
+                } else {
+                    formattedText += `<span class="incorrect">${typedText[i]}</span>`;
+                }
+            }
+        
+            // Update the typed_text div with the formatted content
+            document.getElementById('typed_text').innerHTML = formattedText;
+        
+            // Move the cursor to the end of the contenteditable div
+            moveCursorToEnd(document.getElementById('typed_text'));
+        }
+        
+        function moveCursorToEnd(el) {
+            const range = document.createRange();
+            const sel = window.getSelection();
+            range.selectNodeContents(el);
+            range.collapse(false);
+            sel.removeAllRanges();
+            sel.addRange(range);
+            el.focus();
+        }
 
         document.getElementById('start_button').addEventListener('click', function() {
             // Clear the text area

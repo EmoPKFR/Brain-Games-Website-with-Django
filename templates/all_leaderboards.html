@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}All Games Leaderboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/all_leaderboards.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="leaderboard-container">
+    <h2>Leaderboard for All Games</h2>
+
+    <!-- Math Games Leaderboard -->
+    <h3>Math Games</h3>
+
+<h4>Easy</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th>Highest Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for score in math_game_easy_scores %}
+        {% if score.level.name == 'easy' %}
+        <tr>
+            <td data-label="Rank">{{ forloop.counter }}</td>
+            <td data-label="Username">{{ score.user.username }}</td>
+            <td data-label="Highest Score">{{ score.highest_score }}</td>
+        </tr>
+        {% endif %}
+        {% empty %}
+        <tr>
+            <td colspan="3">No scores available.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h4>Medium</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th>Highest Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for score in math_game_medium_scores %}
+        {% if score.level.name == 'medium' %}
+        <tr>
+            <td data-label="Rank">{{ forloop.counter }}</td>
+            <td data-label="Username">{{ score.user.username }}</td>
+            <td data-label="Highest Score">{{ score.highest_score }}</td>
+        </tr>
+        {% endif %}
+        {% empty %}
+        <tr>
+            <td colspan="3">No scores available.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h4>Hard</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th>Highest Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for score in math_game_hard_scores %}
+        {% if score.level.name == 'hard' %}
+        <tr>
+            <td data-label="Rank">{{ forloop.counter }}</td>
+            <td data-label="Username">{{ score.user.username }}</td>
+            <td data-label="Highest Score">{{ score.highest_score }}</td>
+        </tr>
+        {% endif %}
+        {% empty %}
+        <tr>
+            <td colspan="3">No scores available.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h4>Expert</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th>Highest Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for score in math_game_expert_scores %}
+        {% if score.level.name == 'expert' %}
+        <tr>
+            <td data-label="Rank">{{ forloop.counter }}</td>
+            <td data-label="Username">{{ score.user.username }}</td>
+            <td data-label="Highest Score">{{ score.highest_score }}</td>
+        </tr>
+        {% endif %}
+        {% empty %}
+        <tr>
+            <td colspan="3">No scores available.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h4>Multiplication by 5</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th>Highest Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for score in math_game_multiplication_by_5_scores %}
+        {% if score.level.name == 'multiplication_by_5' %}
+        <tr>
+            <td data-label="Rank">{{ forloop.counter }}</td>
+            <td data-label="Username">{{ score.user.username }}</td>
+            <td data-label="Highest Score">{{ score.highest_score }}</td>
+        </tr>
+        {% endif %}
+        {% empty %}
+        <tr>
+            <td colspan="3">No scores available.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h4>Division by 5</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th>Highest Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for score in math_game_division_by_5_scores %}
+        {% if score.level.name == 'division_by_5' %}
+        <tr>
+            <td data-label="Rank">{{ forloop.counter }}</td>
+            <td data-label="Username">{{ score.user.username }}</td>
+            <td data-label="Highest Score">{{ score.highest_score }}</td>
+        </tr>
+        {% endif %}
+        {% empty %}
+        <tr>
+            <td colspan="3">No scores available.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+    <!-- Sequence Memory Leaderboard -->
+    <h3>Sequence Memory</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Username</th>
+                <th>Highest Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for score in sequence_memory_scores %}
+            <tr>
+                <td data-label="Rank">{{ forloop.counter }}</td>
+                <td data-label="Username">{{ score.user.username }}</td>
+                <td data-label="Highest Score">{{ score.highest_score }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No scores available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Number Memory Leaderboard -->
+    <h3>Number Memory</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Username</th>
+                <th>Highest Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for score in number_memory_scores %}
+            <tr>
+                <td data-label="Rank">{{ forloop.counter }}</td>
+                <td data-label="Username">{{ score.user.username }}</td>
+                <td data-label="Highest Score">{{ score.score }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No scores available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Typing Test Leaderboard -->
+    <h3>Typing Test</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Username</th>
+                <th>Highest WPM</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for score in typing_test_scores %}
+            <tr>
+                <td data-label="Rank">{{ forloop.counter }}</td>
+                <td data-label="Username">{{ score.user.username }}</td>
+                <td data-label="Highest Score">{{ score.wpm|floatformat:0 }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No scores available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

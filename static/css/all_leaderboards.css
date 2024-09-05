@@ -1,0 +1,147 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+    font-size: 1.5em; /* Adjusted for smaller screens */
+    margin-top: 20px;
+    color: #BB86FC;
+}
+
+h3, h4 {
+    color: #BB86FC;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 1.2em; /* Adjusted size */
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    margin: 10px auto;
+    border-collapse: collapse;
+    background-color: #1E1E1E;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 0.85em; /* Smaller font size for better display on mobile */
+}
+
+thead {
+    background-color: #333;
+    color: #BB86FC;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #333;
+    font-size: 0.85em;
+}
+
+th {
+    font-size: 1em;
+    color: #03DAC6;
+}
+
+tr:nth-child(even) {
+    background-color: #2A2A2A;
+}
+
+tr:hover {
+    background-color: #333333;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* Mobile Friendly Styles */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 1.2em; /* Reduced font size on smaller screens */
+    }
+
+    h3, h4 {
+        font-size: 1em; /* Smaller sub-headings for mobile */
+    }
+
+    table {
+        font-size: 0.8em; /* Smaller font size for better fit */
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    th, td {
+        padding: 6px;
+    }
+
+    tr {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    thead {
+        display: none; /* Hide table headers on small screens */
+    }
+
+    td {
+        border: none;
+        padding: 10px;
+        border-bottom: 1px solid #444;
+        display: flex;
+        justify-content: space-between; /* Ensure the label and value are side by side */
+        align-items: center; /* Vertically center the text */
+        position: relative;
+        text-align: left;
+    }
+
+    td:before {
+        content: attr(data-label);
+        flex-basis: 50%; /* Label takes 50% of the space */
+        font-weight: bold;
+        color: #03DAC6;
+        text-transform: uppercase;
+        margin-right: 10px;
+        font-size: 0.85em;
+    }
+
+    td:last-child {
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1em; /* Further reduce font size for very small screens */
+    }
+
+    h3, h4 {
+        font-size: 0.9em; /* Even smaller sub-headings for phones */
+    }
+
+    table {
+        font-size: 0.75em; /* Smaller font size for better fit on very small screens */
+    }
+
+    td {
+        font-size: 0.8em; /* Further reduce font size */
+        padding: 5px; /* Adjust padding for small screens */
+        display: flex;
+        justify-content: space-between; /* Ensures value and label are next to each other */
+        align-items: center; /* Vertical centering */
+    }
+
+    td:before {
+        font-size: 0.75em; /* Smaller label text for mobile */
+        flex-basis: 50%; /* Label and value split the space evenly */
+    }
+}

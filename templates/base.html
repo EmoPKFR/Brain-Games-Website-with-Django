@@ -25,7 +25,7 @@
             <a href="{% url 'sequence_memory:play_game' %}" title="Sequence Memory"><span role="img" aria-label="Sequence Memory">🧠</span></a> |
             <a href="{% url 'number_memory:start_game' %}" title="Number Memory"><span role="img" aria-label="Number Memory">🔢</span></a> |
             <a href="{% url 'typing_test:typing_test' %}" title="Typing Test"><span role="img" aria-label="Typing Test">✍</span></a> |
-            <a href="{% url 'math_games:leaderboard' %}" title="Leaderboard"><span role="img" aria-label="Leaderboard">🏆</span></a> |
+            <a href="/leaderboards" title="Leaderboard"><span role="img" aria-label="Leaderboard">🏆</span></a> |
             <form class="logout" action="{% url 'users:logout' %}" method="post">
                 {% csrf_token %} 
                 <button class="logout-button" aria-label="User Logout" title="User Logout">👋</button>

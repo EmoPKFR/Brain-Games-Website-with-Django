@@ -17,6 +17,7 @@ urlpatterns = [
     path("sequence_memory/", include("sequence_memory.urls")),
     path('number_memory/', include('number_memory.urls')),
     path('typing_test/', include('typing_test.urls')),
+    path('leaderboards/', views.all_leaderboards, name='all_leaderboards'),
 ]
 
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

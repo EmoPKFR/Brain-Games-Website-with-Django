@@ -12,10 +12,16 @@ def start_game(request):
 def show_number(request):
     level = request.session.get("level", 1)
     digits = random.randint(10**(level-1), 10**level-1)
+    
+    # Calculate the time based on the level
+    if level <= 3:
+        time_to_remember = 3
+    else:
+        time_to_remember = 3 + (level - 3)
 
     request.session["number"] = digits
 
-    context = {"number": digits, "level": level}
+    context = {"number": digits, "level": level, "time_to_remember": time_to_remember}
     return render(request, "number_memory/show_number.html", context)
 
 def answer(request):

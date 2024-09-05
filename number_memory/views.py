@@ -43,6 +43,7 @@ def check_number(request):
 
 def game_over(request):
     level = request.session.get("level", 1)
+    highest_score_record = None  # Initialize as None
 
     if request.user.is_authenticated:
         # Get the user's highest score from the database
@@ -58,6 +59,9 @@ def game_over(request):
             # If no score exists, create a new record
             highest_score_record = GameScoreNumberMemory.objects.create(user=request.user, score=level, date=timezone.now())
 
-    context = {"level": level, "highest_score": highest_score_record}
+    context = {
+        "level": level,
+        "highest_score": highest_score_record
+    }
     return render(request, "number_memory/game_over.html", context)
 

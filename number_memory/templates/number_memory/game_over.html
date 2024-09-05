@@ -11,7 +11,7 @@
 {% block content %}
 <div class="number-memory-container">
     <h1>Game Over</h1>
-    <p>You reached level {{ level }}</p>
+    <p>Score: {{ level }}</p>
     {% if highest_score %}
         <p>Your highest score: {{ highest_score.score }} on {{ highest_score.date|date:"Y-m-d" }}</p>
     {% endif %}

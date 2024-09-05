@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import GameScoreSequenceMemory
 
 def play_game(request):
-    return render(request, 'sequence_memory/play_game.html')
+    return render(request, 'sequence_memory/play_game.html',)
 
 
 @login_required

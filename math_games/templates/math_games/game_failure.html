@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title%}Math Games Game Over{% endblock %}
+{% block title %}Math Games Game Over{% endblock %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/math_games.css' %}">
@@ -13,6 +13,11 @@
     <h2>Oops!</h2>
     <p>Your answer was incorrect.</p>
     <p>Your score: {{ score }}</p>
+    
+    {% if highest_score is not None %}
+        <p>Your highest score: {{ highest_score }}</p>
+    {% endif %}
+    
     <a href="{% url 'math_games:play_game' level_name %}">Try again</a>
 </div>
 {% endblock %}

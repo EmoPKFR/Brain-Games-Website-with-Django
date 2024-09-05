@@ -31,7 +31,7 @@ SENTENCES = [
         The trees sway gently in the wind.""",
     """I chop onions and garlic for the sauce.
         The pasta boils in a large pot.
-        The smell of sautéing vegetables fills the kitchen.
+        The smell of sauteing vegetables fills the kitchen.
         I stir the tomato sauce slowly.
         Fresh herbs are added to the mixture.
         The table is set with plates and cutlery.
@@ -81,12 +81,18 @@ def calculate_wpm(request):
                 # Check if there's an existing high score for the user
                 existing_result = TypingTestResult.objects.filter(user=request.user).order_by('-wpm').first()
                 
-                if existing_result is None or wpm > existing_result.wpm:
+                if existing_result is None:
+                    # If no previous result exists, create a new one
                     TypingTestResult.objects.create(
                         user=request.user,
                         wpm=wpm,
                         accuracy=accuracy
                     )
+                elif wpm > existing_result.wpm:
+                    # Update the existing result if the new WPM is higher
+                    existing_result.wpm = wpm
+                    existing_result.accuracy = accuracy
+                    existing_result.save()
 
             return JsonResponse({'wpm': wpm, 'accuracy': accuracy})
 

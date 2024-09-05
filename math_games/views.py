@@ -42,9 +42,8 @@ def generate_problem(level):
 
     return problem, answer
 
-@login_required
 def play_game(request, level_name):
-    level = GameLevel.objects.get(name=level_name)
+    level = GameLevel.objects.get(name=level_name)  # Make sure you're using the level object
 
     # Reset score when switching levels
     if request.session.get("current_level") != level_name:
@@ -68,8 +67,9 @@ def play_game(request, level_name):
                 problem, answer = generate_problem(level_name)
                 request.session['answer'] = answer
             else:
-                # Save the score before redirecting to failure page
-                save_score(request, level)
+                # Only save the score if the user is authenticated
+                if request.user.is_authenticated:
+                    save_score(request, level)  # Pass the level object instead of level_name
                 return redirect("math_games:game_failure", level_name=level_name)
 
         except ValueError:
@@ -83,7 +83,7 @@ def play_game(request, level_name):
             else:
                 # Use the existing problem if available
                 answer = request.session.get('answer')
-            
+
             return render(request, "math_games/play_game.html", {
                 "level": level,
                 "problem": problem,
@@ -95,7 +95,7 @@ def play_game(request, level_name):
     problem, answer = generate_problem(level_name)
     request.session['problem'] = problem
     request.session['answer'] = answer
-    
+
     return render(request, "math_games/play_game.html", {"level": level, "problem": problem, "score": request.session["score"]})
 
 @login_required
@@ -111,27 +111,43 @@ def game_success(request, level_name):
     return render(request, "math_games/game_success.html", {"level_name": level_name})
 
 def game_failure(request, level_name):
-    save_score(request, level_name)
+    level = GameLevel.objects.get(name=level_name)  # Get the level object
     score = request.session.get("score", 0)
+    
+    highest_score = None  # Default if not authenticated
+    
+    if request.user.is_authenticated:
+        save_score(request, level)
+
+        # Retrieve the user's highest score for the current level
+        game_score = GameScore.objects.filter(user=request.user, level=level).first()
+        if game_score:
+            highest_score = game_score.highest_score
+
     request.session["score"] = 0
-    return render(request, "math_games/game_failure.html", {"level_name": level_name, "score": score})
+    
+    return render(request, "math_games/game_failure.html", {
+        "level_name": level_name,
+        "score": score,
+        "highest_score": highest_score
+    })
 
 def select_level(request):
     levels = GameLevel.objects.all()
     return render(request, "math_games/select_level.html", {"levels": levels})
 
-def save_score(request, level_name):
-    level = GameLevel.objects.get(name=level_name)
-    score = request.session.get("score", 0)
-    user = request.user
+def save_score(request, level):
+    if request.user.is_authenticated:
+        score = request.session.get("score", 0)
+        user = request.user
 
-    game_score, created = GameScore.objects.get_or_create(user=user, level=level)
+        game_score, created = GameScore.objects.get_or_create(user=user, level=level)
 
-    # Update the highest_score if the current score is higher
-    if score > game_score.highest_score:
-        game_score.highest_score = score
-    
-    game_score.save()
+        # Update the highest_score if the current score is higher
+        if score > game_score.highest_score:
+            game_score.highest_score = score
+        
+        game_score.save()
 
 @login_required
 def leaderboard(request):

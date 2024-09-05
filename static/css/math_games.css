@@ -1,93 +1,170 @@
+/* General container styles */
 .math-games-container {
-    max-width: 800px;
-    margin: 0 auto; /* Center horizontally */
-    padding: 20px;
-    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 40px auto; /* Center horizontally and add margin from the top */
+    padding: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
+    background-color: #1e1e1e; /* Dark background for contrast */
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Add subtle shadow */
 }
 
+/* Heading styles */
 .math-games-container h2 {
-    color: #FF7F50;
+    color: whitesmoke; /* Bright color for the heading */
     margin-bottom: 20px;
+    font-size: 1em;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for emphasis */
 }
 
-h3 {
-    color: #555;
-    margin-bottom: 10px;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 5px;
+/* Link list styles */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
-p {
-    margin-bottom: 20px;
+li {
+    margin: 15px 0; /* Add spacing between list items */
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-}
-
-th {
-    background-color: #f4f4f4;
-}
-
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-/* Style links */
 .math-games-container a {
-    color: #007bff;
+    display: inline-block;
+    background-color: dodgerblue; /* Dodgerblue background */
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
     text-decoration: none;
+    font-size: 0.8em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s;
 }
 
-/* Style form elements */
+.math-games-container a:hover {
+    background-color: #00c4b4; /* Change color on hover */
+    transform: scale(1.05);
+}
+
+.math-games-container li a {
+    color: dodgerblue; /* Vibrant color for links */
+    text-decoration: none;
+    font-size: 1.3em;
+    background-color: #2a2a2a;
+    padding: 12px 20px;
+    border-radius: 8px;
+    display: inline-block;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+}
+
+.math-games-container li a:hover {
+    background-color: #444;
+    color: #03DAC6; /* Color change on hover */
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Form styles */
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0 auto;
 }
 
 input[type="text"] {
+    text-align: center;
     width: 100%;
-    max-width: 300px;
-    padding: 10px;
+    max-width: 400px;
+    padding: 12px;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
+    border: 10px solid dodgerblue;
+    border-radius: 10px;
+    font-size: 1.1em;
+    color: #ffffff;
+    background-color: #2a2a2a;
+    outline: none;
+    transition: border-color 0.3s;
 }
 
+input[type="text"]:focus {
+    border-color: #03DAC6; /* Change color on focus */
+}
+
+/* Button styles */
 .math-games-container button {
-    padding: 10px 20px;
+    padding: 12px 30px;
     border: none;
-    border-radius: 4px;
-    background-color: #007bff;
+    border-radius: 6px;
+    background-color: dodgerblue;
     color: white;
-    font-size: 16px;
+    font-size: 1.1em;
     cursor: pointer;
-    margin: 5px;
-}
-
-/* Style the list */
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
+    transition: background-color 0.3s, transform 0.3s;
     margin: 10px 0;
 }
 
-.math-games-container li a {
-    color: #FF00FF;
-    text-decoration: none;
-    font-size: 18px;
+.math-games-container button:hover {
+    background-color: #00c4b4;
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: #2a2a2a;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #444;
+}
+
+th {
+    background-color: #333;
+    color: #03DAC6; /* Use a consistent color scheme */
+}
+
+tr:nth-child(even) {
+    background-color: #1e1e1e;
+}
+
+tr:hover {
+    background-color: #444; /* Highlight row on hover */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+    .math-games-container {
+        padding: 20px;
+        margin: 20px auto;
+    }
+
+    .math-games-container h2 {
+        font-size: 1em;
+    }
+
+    .math-games-container li a {
+        font-size: 0.8em;
+        padding: 10px 16px;
+    }
+
+    table, th, td {
+        font-size: 0.9em;
+    }
+
+    .math-games-container button {
+        font-size: 1em;
+    }
+
+    input[type="text"] {
+        font-size: 0.8em;
+    }
 }

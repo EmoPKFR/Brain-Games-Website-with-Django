@@ -55,19 +55,47 @@ def play_game(request, level_name):
         request.session["score"] = 0
 
     if request.method == "POST":
-        user_answer = round(float(request.POST["answer"]), 2)
-        correct_answer = round(float(request.session.get('answer')), 2)
-        print(f"User answer: {user_answer}, Correct answer: {correct_answer}")
+        user_answer_str = request.POST.get("answer", "")
 
-        if user_answer == correct_answer:
-            request.session["score"] += 1
-        else:
-            # Save the score before redirecting to failure page
-            save_score(request, level)
-            return redirect("math_games:game_failure", level_name=level_name)
-    
+        try:
+            # Attempt to convert the user answer to a float
+            user_answer = round(float(user_answer_str), 2)
+            correct_answer = round(float(request.session.get('answer')), 2)
+
+            if user_answer == correct_answer:
+                request.session["score"] += 1
+                # Generate a new problem if the answer is correct
+                problem, answer = generate_problem(level_name)
+                request.session['answer'] = answer
+            else:
+                # Save the score before redirecting to failure page
+                save_score(request, level)
+                return redirect("math_games:game_failure", level_name=level_name)
+
+        except ValueError:
+            # Handle non-numeric input with an error message
+            error_message = "Please enter a valid number."
+            problem = request.session.get('problem')
+            if not problem:
+                # Generate a problem if not already present in the session
+                problem, answer = generate_problem(level_name)
+                request.session['answer'] = answer
+            else:
+                # Use the existing problem if available
+                answer = request.session.get('answer')
+            
+            return render(request, "math_games/play_game.html", {
+                "level": level,
+                "problem": problem,
+                "score": request.session["score"],
+                "error_message": error_message
+            })
+
+    # Generate problem and answer if GET request or if there's no problem in the session
     problem, answer = generate_problem(level_name)
+    request.session['problem'] = problem
     request.session['answer'] = answer
+    
     return render(request, "math_games/play_game.html", {"level": level, "problem": problem, "score": request.session["score"]})
 
 @login_required

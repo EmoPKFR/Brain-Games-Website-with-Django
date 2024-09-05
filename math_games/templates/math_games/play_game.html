@@ -14,11 +14,17 @@
     <p>Score: {{ score }}</p>
     <p>Solve the following problem:</p>
     <p>{{ problem }}</p>
+
+    {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+
     <form method="post" action="{% url 'math_games:play_game' level.name %}">
         {% csrf_token %}
         <input type="text" name="answer" placeholder="Your answer">
         <button type="submit">Submit</button>
     </form>
+
     <form method="get" action="{% url 'math_games:reset_game' level.name %}">
         <button type="submit">Reset</button>
     </form>

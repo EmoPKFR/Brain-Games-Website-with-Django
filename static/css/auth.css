@@ -1,0 +1,78 @@
+.auth-container {
+    max-width: 400px;
+    margin: 50px auto; /* Center horizontally with margin from top */
+    padding: 20px;
+    background-color: green;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.auth-container h1 {
+    margin-bottom: 20px;
+    color: whitesmoke;
+}
+
+.auth-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.auth-container form p {
+    margin-top: 10px;
+}
+
+.auth-container form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+.auth-container form button:hover {
+    background-color: #0056b3;
+}
+
+.auth-container form input {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.auth-container a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.auth-container a:hover {
+    text-decoration: underline;
+}
+
+/* Style for form errors */
+form .errorlist {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+    background-color: #f8d7da; /* Light red background for errors */
+    border: 1px solid #f5c6cb; /* Light red border */
+    border-radius: 5px;
+    color: #721c24; /* Dark red text color */
+    font-size: 16px; /* Slightly larger text for better readability */
+    text-align: left;
+    padding: 15px; /* Added padding for better spacing */
+    font-weight: bold; /* Make the text bold */
+}
+
+form .errorlist li {
+    margin-bottom: 10px; /* Increased margin for better spacing */
+}

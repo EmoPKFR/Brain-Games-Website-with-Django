@@ -1,17 +1,22 @@
-{%extends "base.html"%}
+{% extends "base.html" %}
 
-{%block title%}
-User Login
-{%endblock%}
+{% load static %}
 
-{%block content%}
-<h1>User Login</h1>
-<form class="form-with-validation" action="{% url 'users:login' %}" method="post">
-    {% csrf_token %}
-    {{form}}
-    {%if request.GET.next%}
-        <input type="hidden" name="next" value="{{request.GET.next}}">
-    {%endif%}
-    <button class="form-submit">Submit</button>
-</form>
-{%endblock%}
+{% block title %}Login{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h1>Login</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+        <p>Don't have an account? <a href="{% url 'users:register' %}">Register here</a></p>
+    </form>
+</div>
+{% endblock %}

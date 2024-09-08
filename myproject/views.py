@@ -7,14 +7,11 @@ from number_memory.models import GameScoreNumberMemory
 from typing_test.models import TypingTestResult
 
 def homepage(request):
-    # return HttpResponse("Hello World! I am Home.")
     return render(request, "home.html")
 
 def about(request):
-    # return HttpResponse("My About page.")
     return render(request, "about.html")
 
-@login_required
 def all_leaderboards(request):
     # Query top 10 scores for each game
     math_game_easy_scores = MathGameScore.objects.filter(level__name='easy').order_by('-highest_score')[:10]

@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Post
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseForbidden
 from . import forms
 
 def posts_list(request):
@@ -23,3 +25,18 @@ def new_post(request):
     else:
         form = forms.CreatePost()
     return render(request, "posts/new_post.html", {"form": form})
+
+@login_required(login_url="/users/login/")
+def delete_post(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+
+    # Check if the post author is the same as the user
+    if post.author == request.user:
+        if request.method == "POST":
+            # If a POST request is made, delete the post
+            post.delete()
+            return redirect("posts:list")
+        # Otherwise, show the confirmation page
+        return render(request, "posts/delete_post.html", {"post": post})
+    
+    return HttpResponseForbidden("You are not allowed to delete this post.")

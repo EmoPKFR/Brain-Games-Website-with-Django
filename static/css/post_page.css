@@ -49,6 +49,28 @@ h1 {
     color: #e0e0e0; /* Light text color for body content */
 }
 
+.delete-button {
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.delete-button:hover {
+    background-color: #c0392b;
+}
+
+.confirm-delete {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.confirm-delete h2 {
+    color: #e74c3c;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .post-content {

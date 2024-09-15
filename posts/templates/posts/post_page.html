@@ -17,6 +17,9 @@
         <h1>{{ post.title }}</h1>
         <p class="post-date">{{ post.date }}</p>
         <p class="post-body">{{ post.body }}</p>
+        {% if post.author == user %}
+        <a href="{% url 'posts:delete_post' slug=post.slug %}" class="delete-button">Delete Post</a>
+        {% endif %}
     </section>
 </div>
 {% endblock %}

@@ -1,0 +1,78 @@
+/* General Styles */
+.form-container body {
+    background-color: #121212; /* Dark background for dark mode */
+    color: #e0e0e0; /* Light text color for readability */
+    font-family: Arial, sans-serif;
+}
+
+/* Heading */
+h1 {
+    font-size: 2.5rem;
+    color: #e0e0e0; /* Light color for the heading */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Form Container */
+.form-container {
+    display: flex;
+    justify-content: center; /* Center the form horizontally */
+    padding: 20px;
+}
+
+.form-with-validation {
+    max-width: 600px;
+    background-color: #1e1e1e; /* Darker background for form container */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5); /* Darker shadow for better contrast */
+}
+
+/* Input Fields */
+.form-with-validation input[type="text"],
+.form-with-validation textarea,
+.form-with-validation input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #333; /* Dark border for input fields */
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #2c2c2c; /* Darker background for input fields */
+    color: #e0e0e0; /* Light text color inside input fields */
+}
+
+/* Labels */
+.form-with-validation label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #e0e0e0; /* Light color for labels */
+}
+
+/* Submit Button */
+.form-submit {
+    width: 100%;
+    padding: 10px;
+    background-color: #44B78B; /* Dark mode button color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-submit:hover {
+    background-color: #368e6e; /* Darker shade on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-with-validation {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+}

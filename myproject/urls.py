@@ -19,5 +19,3 @@ urlpatterns = [
     path('typing_test/', include('typing_test.urls')),
     path('leaderboards/', views.all_leaderboards, name='all_leaderboards'),
 ]
-
-# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

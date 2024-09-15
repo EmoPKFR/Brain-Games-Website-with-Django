@@ -1,0 +1,129 @@
+/* Namespace all styles under .typing-test */
+.typing-test .textarea-container {
+    position: relative;
+  }
+  
+  .typing-test .sentence-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+    opacity: 0.5;
+    pointer-events: none; /* Prevent interaction with the placeholder */
+  }
+
+.typing-test {
+    font-family: 'Roboto', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.typing-test .container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.typing-test h1 {
+    color: #333333;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.typing-test p#sentence {
+    font-size: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #555555;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 4px; /* Match the border-radius to the container */
+    margin-bottom: 0; /* Remove or reduce margin to match container */
+    text-align: left;
+    height: auto; /* Auto height to fit content */
+}
+
+.typing-test textarea {
+    width: 100%;
+    max-width: 100%;
+    height: 80px;
+    padding: 10px;
+    font-size: 20px;
+    font-family: 'Arial', sans-serif;
+    border: 1px solid #cccccc;
+    border-radius: 40px;
+    resize: none;
+    margin-bottom: 20px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.typing-test button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s;
+}
+
+.typing-test button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.typing-test button:hover:not(:disabled) {
+    background-color: #45a049;
+}
+
+.typing-test p {
+    font-size: 16px;
+    color: #333333;
+}
+
+.typing-test p span {
+    font-weight: bold;
+}
+
+.typing-test footer {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #777777;
+}
+
+.typing-test .typing-area {
+    width: 100%;
+    max-width: 100%;
+    min-height: 320px; /* Set a minimum height for rows, adjust as needed */
+    padding: 10px;
+    font-size: 20px;
+    font-family: 'Arial', sans-serif;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    white-space: pre-wrap; /* Preserve whitespace */
+    outline: none; /* Remove focus outline */
+    overflow-y: auto;
+    color: transparent;
+}
+
+.typing-test .correct {
+    color: green;
+}
+
+.typing-test .incorrect {
+    color: red;
+}

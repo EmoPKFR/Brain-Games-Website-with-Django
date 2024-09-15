@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-jj!rz1e&wjz(^*2so%05cvhm(%h!out&pci7zhj109d#a3=(57"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -124,11 +125,11 @@ USE_TZ = True
 STATIC_URL = "static/"
 MEDIA_URL = "media/"
 
-STATIC_ROOT = BASE_DIR / "assets"
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = BASE_DIR / "media"
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'static'
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 

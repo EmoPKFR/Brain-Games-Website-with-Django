@@ -52,10 +52,13 @@ h1 {
 .delete-button {
     background-color: #e74c3c;
     color: white;
-    padding: 10px 15px;
+    padding: 5px 10px; /* Reduced padding for a smaller button */
+    font-size: 1.2rem; /* Smaller font size */
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    width: fit-content; /* This makes the width adjust to the button content */
+    display: inline-block; /* Ensure the button does not take up the full width */
 }
 
 .delete-button:hover {

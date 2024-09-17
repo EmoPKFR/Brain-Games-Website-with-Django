@@ -31,8 +31,8 @@
                 <button class="logout-button" aria-label="User Logout" title="User Logout">👋</button>
             </form>
         {%else%}
-            <a href="{% url 'users:register' %}" title="User Registration"><span role="img" aria-label="User Registration">🚀</span></a> |
-            <a href="{% url 'users:login' %}" title="User Login"><span role="img" aria-label="User Login">🔓</span></a> 
+            <a href="{% url 'users:register' %}" title="User Registration"><span role="img" aria-label="User Registration">Register</span></a> |
+            <a href="{% url 'users:login' %}" title="User Login"><span role="img" aria-label="User Login">Login</span></a> 
         {%endif%}
     </nav>
     <main>
